@@ -2,6 +2,9 @@ package repository;
 
 import domain.Issue;
 import domain.IssueComparator;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,6 +20,11 @@ public class IssueRepository {
 
     }
 
+    public List<Issue> getAllIssues() {
+        return issues;
+    }
+
+
     public List<Issue> getIssues(boolean isOpened) {
         List<Issue> result = new ArrayList<>();
         for (Issue issue : issues) {
@@ -27,7 +35,8 @@ public class IssueRepository {
         }
         return result;
     }
-    public List<Issue> filterBy(Predicate<Issue> predicate){
+
+    public List<Issue> filterBy(Predicate<Issue> predicate) {
         List<Issue> result = new ArrayList<>();
         for (Issue issue : issues) {
             if (predicate.test(issue)) {
@@ -37,21 +46,23 @@ public class IssueRepository {
         }
         return result;
     }
-    public List <Issue> sortById(List<Issue> issues) {
-        var result = new ArrayList<Issue>(issues);
+
+    public List<Issue> sortById() {
+        List<Issue> result = new ArrayList<Issue>(issues);
         result.sort(new IssueComparator.IssueComparatorById());
         return result;
     }
-    public List <Issue> sortByAuthor(List<Issue> issues) {
-        var result = new ArrayList<Issue>(issues);
+
+    public List<Issue> sortByAuthor() {
+        List<Issue> result = new ArrayList<Issue>(issues);
         result.sort(new IssueComparator.IssueComparatorByAuthor());
         return result;
     }
 
-    public void updateIssue(int id,boolean isOpened) {
+    public void updateIssue(int id, boolean isOpened) {
         for (Issue issue : issues) {
-            if (issue.getId()==id) {
-               issue.setIsOpened(isOpened) ;
+            if (issue.getId() == id) {
+                issue.setIsOpened(isOpened);
             }
         }
 

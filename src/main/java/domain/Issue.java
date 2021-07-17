@@ -14,11 +14,10 @@ public class Issue implements Comparable<Issue>{
     String title;
     String author;
     String assignee;
-    String label;
     String description;
     Boolean isOpened;
 
-Set <String> labels;
+    Set<String> labels;
 
     @Override
     public int compareTo(Issue o) {
